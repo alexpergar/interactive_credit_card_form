@@ -1,0 +1,300 @@
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500&display=swap');
+
+:root {
+    --red: hsl(0, 100%, 66%);
+    --light-violet: hsl(270, 3%, 87%);
+    --dark-violet: hsl(279, 6%, 55%);
+    --very-dark-violet: hsl(278, 68%, 11%);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Space Grotesk', sans-serif;
+}
+
+html, body {
+    width: 100%;
+    height: 100%;
+}
+
+body {
+    display: flex;
+}
+
+/* Left side stuff */
+
+#left-side {
+    display: grid;
+    width: 60%;
+    grid-template-columns: repeat(10, 1fr);
+    grid-template-rows: repeat(20, 1fr);
+    gap: 20px;
+    
+    background-image: url(images/bg-main-desktop.png);
+    background-size: 50% 100%;
+    background-repeat: no-repeat;
+}
+
+/* Card front */
+
+#credit-front-div {
+    position: relative;
+    grid-column: 1 / span 8;
+    grid-row: 6 / span 6;
+    justify-self: center;
+    align-self: flex-end;
+
+    width: 100%;
+    max-width: 450px;
+
+    color: white;
+}
+
+#card-number-in-card {
+    position: absolute;
+    width: 100%;
+    bottom: 70px;
+    left: 40px;
+
+    font-size: x-large;
+    font-weight: bold;
+    letter-spacing: 2px;
+}
+
+#card-logo {
+    position: absolute;
+    width: 80px;
+    top: 30px;
+    left: 30px;
+}
+
+#holder-name-in-card {
+    position: absolute;
+    width: 80%;
+    bottom: 30px;
+    left: 40px;
+    text-transform: uppercase;
+}
+
+#exp-date-in-card {
+    position: absolute;
+    width: 80%;
+    bottom: 30px;
+    left: 360px;
+}
+
+/* Card back */
+
+#credit-back-div {
+    position: relative;
+    justify-self: center;
+    align-self: flex-start;
+    grid-column: 2 / span 8;
+    grid-row: 12 / span 6;
+
+    width: 100%;
+    max-width: 450px;
+    color: white;
+}
+
+#cvc-in-card {
+    position: absolute;
+    width: 80%;
+    bottom: 120px;
+    left: 360px;
+}
+
+/* Right side stuff */
+
+#right-side {
+    display: grid;
+    width: 40%;
+    align-content: center;
+    justify-content: flex-start;
+}
+
+form {
+    display: grid;
+    grid-template-areas:  "holder-name holder-name"
+                          "holder-name-warning holder-name-warning"
+                          "card-number card-number"
+                          "card-number-warning card-number-warning"
+                          "exp-date cvc"
+                          "exp-date-warning cvc-warning"
+                          "confirm confirm";
+    grid-template-columns: 200px 200px;
+}
+
+form > * {
+    display: flex;
+    flex-direction: column;
+    margin: 10px 0;
+}
+
+form label {
+    margin: 10px 10px 10px 0;
+    font-size: small;
+    letter-spacing: 2px;
+}
+
+form div input {
+    padding: 10px;
+    font-size: large;
+    border-style: solid;
+}
+
+::placeholder {
+    color: var(--light-violet);
+    opacity: 1;
+}
+
+#holder-name {
+    grid-area: holder-name;
+    width: 100%;
+}
+
+#card-number {
+    grid-area: card-number;
+    width: 100%;
+}
+
+#exp-date {
+    display: grid;
+    grid-template-areas: "label label"
+                         "mm     yy"
+                         "warning warning";
+    grid-area: exp-date;
+
+    width: 100%;
+}
+
+#exp-date label {
+    grid-area: label;
+}
+
+#exp-date-mm {
+    grid-area: mm;
+    width: 90%;
+}
+
+#exp-date-yy {
+    grid-area: yy;
+    width: 90%;
+}
+
+#cvc {
+    grid-area: cvc;
+}
+
+#confirm {
+    grid-area: confirm;
+
+    height: 3em;
+    width: 100%;
+    background-color: var(--very-dark-violet);
+    border-radius: .5em;
+    border-style: none;
+
+    font-size: large;
+    color: white;
+}
+
+#confirm:hover {
+    cursor: pointer;
+    background-color: var(--dark-violet);
+}
+
+input[type="text"] {
+    border-radius: 0.4em;
+    border-width: 1px;
+}
+
+
+/* Javascript */
+
+.warning-message { /* Warning messages */
+    color: var(--red);
+    font-size: small;
+    margin-top: -5px;
+}
+
+.warning-border { /* Used in JS when checking form */
+    border-color: var(--red);
+}
+
+/* Media query */
+
+@media(max-width: 1000px) {
+
+    body { 
+        flex-direction: column;
+    }
+
+    #left-side {
+        grid-template-columns: repeat(20, 1fr);
+        width: 100%;
+        height: 300px;
+        
+        background-image: url(images/bg-main-mobile.png);
+        background-size: 100% 80%;
+    }
+
+    #credit-front-div {
+        grid-column: 5 / span 10;
+        grid-row: 11 / span 6;
+        width: 20em;
+        z-index: 2;
+    }
+    
+    #credit-back-div {
+        grid-column: 6 / span 10;
+        grid-row: 2 / span 6;
+        width: 20em;
+        z-index: 1;
+    }
+
+    #credit-front, #credit-back {
+        width: 20em;
+    }
+
+    #card-logo {
+        width: 60px;
+    }
+
+    #card-number-in-card {
+        bottom: 50px;
+        font-size: 1.1em;
+    }
+    
+    #holder-name-in-card {
+        bottom: 25px;
+        font-size: x-small;
+    }
+    
+    #exp-date-in-card {
+        width: 30px;
+        bottom: 25px;
+        left: 250px;
+        font-size: x-small;
+    }
+    
+    #cvc-in-card {
+        width: 30px;
+        bottom: 83px;
+        left: 245px;
+    }
+
+    #right-side {
+        align-self: center;
+        justify-content: center;
+
+        width: 340px;
+        height: 100%;
+    }
+
+    form {
+        grid-template-columns: 170px 170px;
+    }
+}
